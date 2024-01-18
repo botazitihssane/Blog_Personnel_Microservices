@@ -23,29 +23,25 @@ public class CategorieController {
 	@Autowired
 	private CategorieService categorieService;
 
-	@PostMapping(value = "/categorie", produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@PostMapping(value = "/categorie", produces = { "application/json", "application/xml" })
 	public ResponseEntity<Void> add(@RequestBody Categorie p) {
 		categorieService.create(p);
 		return ResponseEntity.noContent().build();
 	}
 
-	@GetMapping(value = "/categories", produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@GetMapping(value = "/categories", produces = { "application/json", "application/xml" })
 	public ResponseEntity<List<Categorie>> findAll() {
 		List<Categorie> result = categorieService.findAll();
 		return ResponseEntity.ok().body(result);
 	}
 
-	@GetMapping(value = "/categorie/id/{id}", produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@GetMapping(value = "/categorie/id/{id}", produces = { "application/json", "application/xml" })
 	public ResponseEntity<Categorie> findcategorie(@PathVariable int id) {
 		Categorie result = categorieService.findById(id);
 		return ResponseEntity.ok().body(result);
 	}
 
-	@GetMapping(value = "/categorie/nom/{nom}", produces = { "application/json", "application/xml" }, consumes = {
-			"application/json", "application/xml" })
+	@GetMapping(value = "/categorie/nom/{nom}", produces = { "application/json", "application/xml" })
 	public ResponseEntity<Categorie> findcategorieByNom(@PathVariable String nom) {
 		Categorie result = categorieService.findByNom(nom);
 		return ResponseEntity.ok().body(result);

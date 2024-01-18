@@ -87,4 +87,31 @@ public class ArticleServiceImpl implements ArticleService {
 
 	}
 
+	@Override
+	public void update(Article a) {
+		Article newArticle;
+		try {
+			newArticle = findById(a.getId());
+			if (newArticle != null) {
+				System.out.println(newArticle);
+				newArticle.setCategorie(a.getCategorie());
+				newArticle.setDate(a.getDate());
+				newArticle.setLien(a.getLien());
+				newArticle.setNombreCommentaire(a.getNombreCommentaire());
+				newArticle.setPhoto(a.getPhoto());
+				newArticle.setTexte(a.getTexte());
+				newArticle.setTitre(a.getTitre());
+				articleRepository.save(newArticle);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void delete(int id) {
+		articleRepository.deleteById(id);
+	}
+
 }

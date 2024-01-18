@@ -27,4 +27,8 @@ public interface ArticleService {
 	public void addCommentaire(Commentaire c);
 
 	public void deleteCommentaire(Commentaire c);
+
+	public void update(Article a);
+
+	public void delete(int id);
 }
