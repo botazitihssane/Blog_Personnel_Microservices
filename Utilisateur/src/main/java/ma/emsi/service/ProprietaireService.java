@@ -5,6 +5,7 @@ import java.util.List;
 import ma.emsi.model.Proprietaire;
 import ma.emsi.model.Utilisateur;
 import ma.emsi.response.ApiResponse;
+import ma.emsi.response.LoginResponse;
 
 public interface ProprietaireService {
 
@@ -18,5 +19,5 @@ public interface ProprietaireService {
 
 	public Proprietaire findById(int id);
 	
-	public ApiResponse login(Utilisateur utilisateur);
+	public LoginResponse login(Utilisateur utilisateur);
 }

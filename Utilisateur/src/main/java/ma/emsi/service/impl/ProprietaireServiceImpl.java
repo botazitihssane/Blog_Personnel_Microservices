@@ -11,7 +11,7 @@ import ma.emsi.model.Proprietaire;
 import ma.emsi.model.Utilisateur;
 import ma.emsi.repository.ProprietaireRepository;
 import ma.emsi.repository.UtilisateurRepository;
-import ma.emsi.response.ApiResponse;
+import ma.emsi.response.LoginResponse;
 import ma.emsi.service.ProprietaireService;
 
 @Service
@@ -70,7 +70,7 @@ public class ProprietaireServiceImpl implements ProprietaireService {
 	}
 
 	@Override
-	public ApiResponse login(Utilisateur utilisateur) {
+	public LoginResponse login(Utilisateur utilisateur) {
 		Utilisateur user = userRepository.getUserByEmail(utilisateur.getEmail());
 		if (user != null) {
 			String password = utilisateur.getPassword();
@@ -80,12 +80,10 @@ public class ProprietaireServiceImpl implements ProprietaireService {
 				Optional<Utilisateur> u = userRepository.findByEmailAndPassword(utilisateur.getEmail(),
 						encodedPassword);
 				if (u.isPresent())
-					return new ApiResponse("Login Success", true);
-				else
-					return new ApiResponse("Login Failed", false);
-			} else
-				return new ApiResponse("Password Not Match", false);
-		} else
-			return new ApiResponse("Email Do Not Exist", false);
+					return new LoginResponse(user.getId(), user.getEmail());
+
+			}
+		}
+		return new LoginResponse();
 	}
 }

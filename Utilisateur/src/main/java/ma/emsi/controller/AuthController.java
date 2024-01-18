@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ma.emsi.model.Proprietaire;
 import ma.emsi.model.Utilisateur;
 import ma.emsi.response.ApiResponse;
+import ma.emsi.response.LoginResponse;
 import ma.emsi.service.ProprietaireService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -27,8 +28,12 @@ public class AuthController {
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> login(@RequestBody Utilisateur user) {
-		ApiResponse loginReponse = proprietaireService.login(user);
-		return ResponseEntity.ok(loginReponse);
+		LoginResponse loginResponse = proprietaireService.login(user);
+		if (loginResponse.isSuccess()) {
+			return ResponseEntity.ok(loginResponse);
+		} else {
+			return ResponseEntity.status(401).body(loginResponse);
+		}
 	}
 
 	@PostMapping("/signup")
